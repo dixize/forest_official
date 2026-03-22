@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FOREST | Save The Nature</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-[#030704] text-green-50 font-sans overflow-x-hidden selection:bg-green-900 selection:text-white">
+
+    <header class="fixed top-0 w-full z-[100] transition-all duration-500" id="main-header">
+        <div class="max-w-7xl mx-auto px-6 h-28 flex items-center justify-between">
+            <button onclick="window.open('https://wa.me/', '_blank')" class="action-btn">
+                whatsapp
+            </button>
+            
+            <h1 class="forest-title cursor-pointer tracking-widest text-5xl md:text-7xl lg:text-8xl hover:scale-105 transition-transform duration-700" onclick="showPage('menu')">
+                FOREST
+            </h1>
+            
+            <button onclick="openContactModal()" class="action-btn">
+                telegram
+            </button>
+        </div>
+    </header>
+
+    <main id="main-content" class="min-h-screen">
+        
+        <section id="page-home" class="page-section active flex flex-col min-h-screen relative">
+            <div class="flex-grow moss-bg relative overflow-hidden flex items-center justify-center pt-28">
+                <div class="absolute inset-0 bg-black/40 mix-blend-multiply"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-[#030704] via-transparent to-transparent opacity-80"></div>
+                <div class="particles"></div>
+            </div>
+
+            <div class="h-64 wood-bg relative flex flex-col justify-end p-8 md:p-12 z-10 shadow-[0_-20px_50px_rgba(0,0,0,0.8)]">
+                <div class="leaves-border absolute -top-10 left-0 w-full h-24"></div>
+                <div class="absolute inset-0 bg-black/50"></div>
+                <h2 class="relative z-10 font-serif text-3xl md:text-5xl font-black text-[#2e472d] tracking-tighter leading-none opacity-80 mix-blend-color-dodge text-shadow-wood">
+                    the website <br> about forest save
+                </h2>
+            </div>
+        </section>
+
+        <section id="page-menu" class="page-section hidden pt-36 px-6 pb-20">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <p class="text-green-600/60 font-bold uppercase tracking-[0.3em] text-xs mb-4">Выберите раздел</p>
+                    <h2 class="text-4xl md:text-5xl font-serif text-green-100">Изучайте и сохраняйте</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                    <div onclick="renderItems('Flora')" class="cat-card group">
+                        <i class="fa-solid fa-tree"></i>
+                        <span>ФЛОРА</span>
+                    </div>
+                    <div onclick="renderItems('Fauna')" class="cat-card group">
+                        <i class="fa-solid fa-paw"></i>
+                        <span>ФАУНА</span>
+                    </div>
+                    <div onclick="renderItems('Ecology')" class="cat-card group">
+                        <i class="fa-solid fa-earth-americas"></i>
+                        <span>ЭКОЛОГИЯ</span>
+                    </div>
+                    <div onclick="renderItems('Help')" class="cat-card group">
+                        <i class="fa-solid fa-hands-holding-circle"></i>
+                        <span>КАК ПОМОЧЬ</span>
+                    </div>
+                </div>
+
+                <div id="items-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    </div>
+            </div>
+        </section>
+
+        <section id="page-detail" class="page-section hidden pt-36 px-6 pb-20">
+            <div id="detail-container"></div>
+        </section>
+
+    </main>
+
+    <div id="contact-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="closeContactModal()"></div>
+        <div class="relative bg-[#051006] w-full max-w-lg rounded-[32px] overflow-hidden border border-green-900/50 shadow-[0_0_100px_rgba(20,50,20,0.5)] p-8">
+            <button onclick="closeContactModal()" class="absolute top-6 right-6 text-green-600 hover:text-green-400 transition"><i class="fa-solid fa-xmark text-2xl"></i></button>
+            <h3 class="text-3xl font-serif text-green-100 mb-2">Связь с нами</h3>
+            <p class="text-green-800 text-sm mb-8 font-bold uppercase tracking-widest">Telegram Интеграция</p>
+            
+            <div class="space-y-4">
+                <input type="text" id="tg-name" placeholder="Ваше имя" class="w-full bg-[#020502] border border-green-900/50 rounded-2xl p-4 text-green-100 placeholder-green-900 focus:border-green-500 outline-none transition">
+                <input type="tel" id="tg-phone" placeholder="Контактный телефон" class="w-full bg-[#020502] border border-green-900/50 rounded-2xl p-4 text-green-100 placeholder-green-900 focus:border-green-500 outline-none transition">
+                <textarea id="tg-message" placeholder="Как вы хотите помочь лесу?" rows="3" class="w-full bg-[#020502] border border-green-900/50 rounded-2xl p-4 text-green-100 placeholder-green-900 focus:border-green-500 outline-none transition resize-none"></textarea>
+                
+                <button onclick="sendTelegramMessage()" class="w-full bg-gradient-to-r from-green-900 to-[#1a331a] border border-green-700/50 text-green-100 py-4 rounded-2xl font-black hover:shadow-[0_0_30px_rgba(20,80,20,0.8)] transition-all active:scale-95 uppercase tracking-widest mt-4">
+                    Отправить
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
